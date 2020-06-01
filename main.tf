@@ -34,6 +34,7 @@ module "ous5" {
 }
 
 locals {
-  ous = merge(data.aws_organizations_organizational_units.ous_1, module.ous2.ous, module.ous3.ous, module.ous4.ous, module.ous5.ous)
-  ids = merge({ "Root" : local.root_id }, module.ous2.ids, module.ous3.ids, module.ous4.ids, module.ous5.ids)
+  accounts = { for account in data.aws_organizations_organization.org.accounts : account["name"] => account["id"] }
+  ous      = merge({ "Root" : local.root_id }, module.ous2.ids, module.ous3.ids, module.ous4.ids, module.ous5.ids)
+  roots    = { for root in data.aws_organizations_organization.org.roots : root["name"] => root["id"] }
 }

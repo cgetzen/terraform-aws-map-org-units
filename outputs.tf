@@ -1,9 +1,14 @@
-output "ous" {
-  value       = { for name, ou in local.ous : name => ou.id }
-  description = "OU structure showing parents and children"
+output "accounts" {
+  value       = local.accounts
+  description = "Map of account names to ids"
 }
 
-output "ids" {
-  value       = local.ids
+output "ous" {
+  value       = local.ous
   description = "Map of OU names to ids"
+}
+
+output "roots" {
+  value       = local.roots
+  description = "Map of root names to ids"
 }
